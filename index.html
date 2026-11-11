@@ -1,12 +1,212 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="robots" content="noindex">
-  <title>Josh Huang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="googlebot" content="noindex, nofollow">
+  <title>Jian Ming Huang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    /* Layout: one narrow reading column, left-aligned; a label gutter on wide screens that stacks on phones. */
+    :root {
+      --paper: #f6f8f9;
+      --ink: #14212b;
+      --muted: #566572;
+      --rule: #d5dde3;
+      --accent: #0d6e8a;
+      --deviant: #c2572b;
+      --display: "Fraunces", Georgia, "Times New Roman", serif;
+      --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --paper: #10181e;
+        --ink: #e6edf1;
+        --muted: #97a6b2;
+        --rule: #2a3741;
+        --accent: #6cc3dc;
+        --deviant: #ef8f63;
+      }
+    }
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --paper: #10181e;
+      --ink: #e6edf1;
+      --muted: #97a6b2;
+      --rule: #2a3741;
+      --accent: #6cc3dc;
+      --deviant: #ef8f63;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px 24px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    nav .name { font-family: var(--display); font-weight: 600; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+    nav ul { display: flex; flex-wrap: wrap; gap: 20px; list-style: none; margin: 0; padding: 0; }
+    nav ul a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
+    nav ul a:hover { color: var(--accent); }
+
+    header { padding: 56px 0 40px; }
+    .keywords {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin: 0 0 14px;
+    }
+    h1 {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(2.2rem, 6vw, 3.1rem);
+      line-height: 1.1;
+      margin: 0 0 22px;
+      text-wrap: balance;
+    }
+    /* An oddball tone sequence: repeated standards with one deviant. */
+    .oddball { display: flex; align-items: flex-end; gap: 7px; height: 26px; margin: 0 0 26px; }
+    .oddball span { width: 5px; height: 14px; background: var(--rule); border-radius: 1px; }
+    .oddball span.dev { height: 26px; background: var(--deviant); }
+    .bio { max-width: 62ch; margin: 0; }
+    .bio + .bio { margin-top: 14px; }
+
+    section { padding: 36px 0; border-top: 1px solid var(--rule); }
+    h2 {
+      font-family: var(--mono);
+      font-weight: 400;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 20px;
+    }
+    h3 {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 1.3rem;
+      line-height: 1.25;
+      margin: 0 0 4px;
+      text-wrap: balance;
+    }
+    .meta { color: var(--muted); font-size: 0.92rem; margin: 0; }
+    .entry p { max-width: 62ch; }
+
+    .edu { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 24px; }
+    .edu p { margin: 0; }
+    .edu .when { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+    .projects { display: flex; flex-direction: column; gap: 34px; }
+    .status {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      padding: 2px 8px;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .status.active { color: var(--accent); border-color: var(--accent); }
+    .summary { margin: 10px 0 8px; }
+    .soon { font-family: var(--mono); font-size: 0.82rem; color: var(--muted); margin: 0; }
+
+    footer { padding: 28px 0 48px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.88rem; }
+  </style>
 </head>
 <body>
-  <h1>Josh Huang</h1>
-  <p>EE + BCN at the University of Michigan. Interested in auditory cortex circuits.</p>
+  <div class="wrap" id="top">
+    <nav aria-label="Main">
+      <a class="name" href="#top">Jian Ming Huang</a>
+      <ul>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="mailto:flesym@umich.edu">Contact</a></li>
+      </ul>
+    </nav>
+
+    <header>
+      <p class="keywords">auditory cortex · circuit models · electrophysiology</p>
+      <h1>Jian Ming Huang</h1>
+      <div class="oddball" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span class="dev"></span><span></span><span></span><span></span><span></span>
+      </div>
+      <p class="bio">I am an undergraduate at the University of Michigan studying electrical engineering, neuroscience, and mathematics. I am interested in how circuits in the auditory system process sound, and I build mechanistic models to study them.</p>
+      <p class="bio">I work with Dr. Anahita Mehta at the Kresge Hearing Research Institute, where I use EEG to study how listeners respond to violations of harmonic expectation. Before that, I worked with Dr. Gideon Rothschild on sound-guided navigation in rats.</p>
+    </header>
+
+    <section id="education">
+      <h2>Education</h2>
+      <div class="edu">
+        <div>
+          <h3>University of Michigan, Ann Arbor</h3>
+          <p>B.S.E. in Electrical Engineering</p>
+          <p>B.S. in Biopsychology, Cognition, and Neuroscience and Mathematics</p>
+        </div>
+        <p class="when">Expected July 2027</p>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects">
+
+        <article class="entry">
+          <span class="status active">In progress</span>
+          <h3>Circuit Model of Stimulus-Specific Adaptation in Auditory Cortex</h3>
+          <p class="meta">Mathematical and Computational Neuroscience (MATH 568), 2026</p>
+          <p class="summary">Neurons in auditory cortex respond less to a repeated tone and more to a rare one. This project asks how much of that effect comes from depression at thalamocortical synapses and how much from short-term plasticity at interneuron synapses, by fitting two versions of a cortical circuit model to oddball recordings from rat auditory cortex.</p>
+          <p class="soon">Write-up and code coming soon</p>
+        </article>
+
+        <article class="entry">
+          <span class="status active">In progress</span>
+          <h3>Cochlear Implant Speech Processing and Intelligibility</h3>
+          <p class="meta">Digital Signal Processing (EECS 351), 2026</p>
+          <p class="summary">A cochlear-implant-style processing pipeline in Python, with a noise vocoder to resynthesize what the processed speech sounds like. The project measures how channel count, envelope cutoff, and compression change intelligibility, and compares an objective intelligibility metric against automatic speech recognition.</p>
+          <p class="soon">Write-up, audio demos, and code coming soon</p>
+        </article>
+
+        <article class="entry">
+          <span class="status">Completed 2025</span>
+          <h3>Thalamocortical Network Model of Absence Seizures</h3>
+          <p class="meta">Team project, Mathematical Models (MATH 462), 2025</p>
+          <p class="summary">A 350-neuron conductance-based network of cortical and thalamic cells. Strengthening corticothalamic feedback moves the network from gamma oscillations to 3 Hz seizure-like discharges, and a fast–slow analysis explains how slow inhibition sets the discharge period.</p>
+          <p class="soon">Write-up and code coming soon</p>
+        </article>
+
+      </div>
+    </section>
+
+    <footer>
+      © 2026 Jian Ming Huang · Ann Arbor, MI
+    </footer>
+  </div>
 </body>
 </html>
