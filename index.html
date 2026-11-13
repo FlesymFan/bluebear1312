@@ -10,12 +10,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
   <style>
-    /* Layout: one narrow reading column, left-aligned; a label gutter on wide screens that stacks on phones. */
+    /* Layout: one left-aligned column; each project is a two-column row (course and status gutter, then content) that stacks on phones. */
     :root {
       --paper: #f6f8f9;
       --ink: #14212b;
       --muted: #566572;
       --rule: #d5dde3;
+      --chip: #e9eef1;
       --accent: #0d6e8a;
       --deviant: #c2572b;
       --display: "Fraunces", Georgia, "Times New Roman", serif;
@@ -29,6 +30,7 @@
         --ink: #e6edf1;
         --muted: #97a6b2;
         --rule: #2a3741;
+        --chip: #1b262e;
         --accent: #6cc3dc;
         --deviant: #ef8f63;
       }
@@ -39,6 +41,7 @@
       --ink: #e6edf1;
       --muted: #97a6b2;
       --rule: #2a3741;
+      --chip: #1b262e;
       --accent: #6cc3dc;
       --deviant: #ef8f63;
     }
@@ -53,11 +56,12 @@
       font-family: var(--body);
       font-size: 17px;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
     a { color: var(--accent); text-underline-offset: 3px; }
     a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
-    .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
 
     nav {
       display: flex;
@@ -69,11 +73,11 @@
       border-bottom: 1px solid var(--rule);
     }
     nav .name { font-family: var(--display); font-weight: 600; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
-    nav ul { display: flex; flex-wrap: wrap; gap: 20px; list-style: none; margin: 0; padding: 0; }
-    nav ul a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
+    nav ul { display: flex; flex-wrap: wrap; gap: 6px 22px; list-style: none; margin: 0; padding: 0; }
+    nav ul a { color: var(--muted); text-decoration: none; font-size: 0.93rem; }
     nav ul a:hover { color: var(--accent); }
 
-    header { padding: 56px 0 40px; }
+    header { padding: 64px 0 52px; }
     .keywords {
       font-family: var(--mono);
       font-size: 0.8rem;
@@ -84,19 +88,18 @@
     h1 {
       font-family: var(--display);
       font-weight: 600;
-      font-size: clamp(2.2rem, 6vw, 3.1rem);
-      line-height: 1.1;
-      margin: 0 0 22px;
+      font-size: clamp(2.3rem, 6vw, 3.3rem);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin: 0 0 24px;
       text-wrap: balance;
     }
     /* An oddball tone sequence: repeated standards with one deviant. */
-    .oddball { display: flex; align-items: flex-end; gap: 7px; height: 26px; margin: 0 0 26px; }
+    .oddball { display: flex; align-items: flex-end; gap: 7px; height: 26px; margin: 0 0 28px; }
     .oddball span { width: 5px; height: 14px; background: var(--rule); border-radius: 1px; }
     .oddball span.dev { height: 26px; background: var(--deviant); }
-    .bio { max-width: 62ch; margin: 0; }
-    .bio + .bio { margin-top: 14px; }
+    .bio { max-width: 60ch; margin: 0; font-size: 1.08rem; }
 
-    section { padding: 36px 0; border-top: 1px solid var(--rule); }
     h2 {
       font-family: var(--mono);
       font-weight: 400;
@@ -104,26 +107,23 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
-      margin: 0 0 20px;
+      margin: 0;
+      padding: 0 0 14px;
+      border-bottom: 1px solid var(--rule);
     }
-    h3 {
-      font-family: var(--display);
-      font-weight: 500;
-      font-size: 1.3rem;
-      line-height: 1.25;
-      margin: 0 0 4px;
-      text-wrap: balance;
+
+    .entry {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 8px 36px;
+      padding: 40px 0;
+      border-bottom: 1px solid var(--rule);
+      scroll-margin-top: 12px;
     }
-    .meta { color: var(--muted); font-size: 0.92rem; margin: 0; }
-    .entry p { max-width: 62ch; }
-
-    .edu { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 24px; }
-    .edu p { margin: 0; }
-    .edu .when { color: var(--muted); font-variant-numeric: tabular-nums; }
-
-    .projects { display: flex; flex-direction: column; gap: 34px; }
+    .side { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding-top: 5px; }
+    .side p { margin: 0; font-size: 0.88rem; color: var(--muted); line-height: 1.45; }
+    .side .course { font-family: var(--mono); font-size: 0.8rem; color: var(--ink); letter-spacing: 0.03em; }
     .status {
-      display: inline-block;
       font-family: var(--mono);
       font-size: 0.72rem;
       letter-spacing: 0.04em;
@@ -131,13 +131,44 @@
       border: 1px solid var(--rule);
       border-radius: 3px;
       color: var(--muted);
-      margin-bottom: 10px;
+      margin-top: 6px;
     }
     .status.active { color: var(--accent); border-color: var(--accent); }
-    .summary { margin: 10px 0 8px; }
-    .soon { font-family: var(--mono); font-size: 0.82rem; color: var(--muted); margin: 0; }
 
-    footer { padding: 28px 0 48px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.88rem; }
+    h3 {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 1.5rem;
+      line-height: 1.22;
+      margin: 0 0 12px;
+      text-wrap: balance;
+    }
+    .summary { margin: 0 0 20px; max-width: 62ch; }
+
+    dl { margin: 0 0 20px; display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 10px 16px; max-width: 62ch; }
+    dt { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding-top: 4px; }
+    dd { margin: 0; font-size: 0.97rem; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0 0 16px; padding: 0; }
+    .tags li {
+      font-size: 0.8rem;
+      color: var(--muted);
+      background: var(--chip);
+      padding: 2px 9px;
+      border-radius: 3px;
+    }
+    .soon { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); margin: 0; }
+
+    footer { padding: 28px 0 56px; color: var(--muted); font-size: 0.88rem; }
+
+    @media (max-width: 640px) {
+      .entry { grid-template-columns: minmax(0, 1fr); padding: 32px 0; }
+      .side { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 4px 14px; padding: 0 0 6px; }
+      .status { margin-top: 0; }
+      dl { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+      dd { margin-bottom: 10px; }
+      header { padding: 44px 0 40px; }
+    }
   </style>
 </head>
 <body>
@@ -145,50 +176,93 @@
     <nav aria-label="Main">
       <a class="name" href="#top">Jian Ming Huang</a>
       <ul>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="mailto:flesym@umich.edu">Contact</a></li>
+        <li><a href="#adaptation">Adaptation</a></li>
+        <li><a href="#cochlear-implant">Cochlear implant</a></li>
+        <li><a href="#absence-seizures">Absence seizures</a></li>
       </ul>
     </nav>
 
     <header>
-      <p class="keywords">auditory cortex · circuit models · electrophysiology</p>
+      <p class="keywords">auditory cortex · circuit models · signal processing</p>
       <h1>Jian Ming Huang</h1>
       <div class="oddball" aria-hidden="true">
         <span></span><span></span><span></span><span></span><span></span><span></span><span class="dev"></span><span></span><span></span><span></span><span></span>
       </div>
-      <p class="bio">I am an undergraduate at the University of Michigan studying electrical engineering, neuroscience, and mathematics. I am interested in how circuits in the auditory system process sound, and I build mechanistic models to study them.</p>
+      <p class="bio">I am an undergraduate at the University of Michigan studying electrical engineering, neuroscience, and mathematics. I am interested in how circuits in the auditory system process sound, and I build mechanistic models to study them. This page collects three course projects.</p>
     </header>
 
-    <section id="projects">
+    <main>
       <h2>Projects</h2>
-      <div class="projects">
 
-        <article class="entry">
+      <article class="entry" id="adaptation">
+        <div class="side">
+          <p class="course">MATH 568</p>
+          <p>Mathematical and Computational Neuroscience</p>
+          <p>Sept 2026 – present</p>
           <span class="status active">In progress</span>
+        </div>
+        <div>
           <h3>Circuit Model of Stimulus-Specific Adaptation in Auditory Cortex</h3>
-          <p class="meta">Mathematical and Computational Neuroscience (MATH 568), 2026</p>
-          <p class="summary">Neurons in auditory cortex respond less to a repeated tone and more to a rare one. This project asks how much of that effect comes from depression at thalamocortical synapses and how much from short-term plasticity at interneuron synapses, by fitting two versions of a cortical circuit model to oddball recordings from rat auditory cortex.</p>
+          <p class="summary">Neurons in auditory cortex respond less to a repeated tone and more to a rare one. This project asks how much of that tone-by-tone adaptation comes from depression at thalamocortical synapses, and how much from short-term plasticity at interneuron synapses.</p>
+          <dl>
+            <dt>Approach</dt>
+            <dd>I add activity-dependent Tsodyks–Markram short-term plasticity to the synapses to and from parvalbumin (PV) and somatostatin (SST) interneurons in the Park and Geffen (2020) circuit model. I fit the original and extended models to oddball recordings from 114 neurons in rat auditory cortex (Vázquez-Borsetti et al., 2026) and test how well each predicts held-out responses after a deviant tone.</dd>
+            <dt>So far</dt>
+            <dd>I derived a closed-form tone-to-tone map for thalamocortical depression. It predicts synaptic strength at each tone onset from the model parameters and agrees with simulation to within 0.003.</dd>
+          </dl>
+          <ul class="tags" aria-label="Methods">
+            <li>Short-term plasticity</li><li>Cortical circuit models</li><li>Model fitting</li><li>Out-of-sample prediction</li>
+          </ul>
           <p class="soon">Write-up and code coming soon</p>
-        </article>
+        </div>
+      </article>
 
-        <article class="entry">
+      <article class="entry" id="cochlear-implant">
+        <div class="side">
+          <p class="course">EECS 351</p>
+          <p>Digital Signal Processing</p>
+          <p>Sept 2026 – present</p>
           <span class="status active">In progress</span>
+        </div>
+        <div>
           <h3>Cochlear Implant Speech Processing and Intelligibility</h3>
-          <p class="meta">Digital Signal Processing (EECS 351), 2026</p>
-          <p class="summary">A cochlear-implant-style processing pipeline in Python, with a noise vocoder to resynthesize what the processed speech sounds like. The project measures how channel count, envelope cutoff, and compression change intelligibility, and compares an objective intelligibility metric against automatic speech recognition.</p>
+          <p class="summary">A cochlear implant reduces speech to slow amplitude envelopes in a small number of frequency channels. This project builds that processing chain in Python and measures how much intelligibility survives it.</p>
+          <dl>
+            <dt>Approach</dt>
+            <dd>The pipeline uses a Greenwood-spaced band-pass filter bank, envelope extraction by full-wave rectification and low-pass filtering, and power-law compression, followed by noise-vocoder resynthesis. I vary channel count from 1 to 22, envelope cutoff, and compression level, and score the output with short-time objective intelligibility (STOI) and the word error rate (WER) of an automatic speech recognizer.</dd>
+            <dt>So far</dt>
+            <dd>The two measures disagree. STOI scores of 0.47 to 0.64 occur alongside WER of 100% or more. I am extending the framework to speech in background noise to test whether front-end denoising helps.</dd>
+          </dl>
+          <ul class="tags" aria-label="Methods">
+            <li>Python</li><li>Filter banks</li><li>Noise vocoder</li><li>STOI</li><li>ASR word error rate</li>
+          </ul>
           <p class="soon">Write-up, audio demos, and code coming soon</p>
-        </article>
+        </div>
+      </article>
 
-        <article class="entry">
-          <span class="status">Completed 2025</span>
+      <article class="entry" id="absence-seizures">
+        <div class="side">
+          <p class="course">MATH 462</p>
+          <p>Mathematical Models, team project</p>
+          <p>Jan – Apr 2025</p>
+          <span class="status">Completed</span>
+        </div>
+        <div>
           <h3>Thalamocortical Network Model of Absence Seizures</h3>
-          <p class="meta">Team project, Mathematical Models (MATH 462), 2025</p>
-          <p class="summary">A 350-neuron conductance-based network of cortical and thalamic cells. Strengthening corticothalamic feedback moves the network from gamma oscillations to 3 Hz seizure-like discharges, and a fast–slow analysis explains how slow inhibition sets the discharge period.</p>
+          <p class="summary">Absence seizures appear as 3 Hz discharges that involve both cortex and thalamus. This project models how feedback from cortex to thalamus can move a network from normal gamma oscillations into that seizure-like rhythm.</p>
+          <dl>
+            <dt>Approach</dt>
+            <dd>We extended a conductance-based pyramidal–interneuron network gamma (PING) model to a 350-neuron thalamocortical network with relay and reticular populations. The model includes T-type calcium currents, AMPA, GABA<sub>A</sub>, and GABA<sub>B</sub> synapses, and corticothalamic feedback.</dd>
+            <dt>Result</dt>
+            <dd>The network shifts from gamma oscillations to 3 Hz seizure-like discharges depending on corticothalamic feedback, which we characterized with spectral, bursting, and synchrony analyses. A fast–slow bifurcation analysis identifies a saddle-node threshold for thalamic rebound bursting and explains how slow GABA<sub>B</sub> inhibition sets the discharge period.</dd>
+          </dl>
+          <ul class="tags" aria-label="Methods">
+            <li>Conductance-based networks</li><li>Numerical simulation</li><li>Fast–slow analysis</li><li>Spectral analysis</li>
+          </ul>
           <p class="soon">Write-up and code coming soon</p>
-        </article>
-
-      </div>
-    </section>
+        </div>
+      </article>
+    </main>
 
     <footer>
       © 2026 Jian Ming Huang · Ann Arbor, MI
