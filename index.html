@@ -6,175 +6,166 @@
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="googlebot" content="noindex, nofollow">
   <title>Jian Ming Huang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Source+Sans+3:wght@400;600&family=Source+Code+Pro:wght@400&display=swap" rel="stylesheet">
   <style>
-    /* Layout: white page, a narrow left sidebar with the author block, and one main reading column. Sidebar stacks above the content on phones. */
+    /* Layout: white page, one wide left-aligned column. Intro is photo beside bio; sections are a serif heading with a rule running to the right edge. Everything stacks on phones. */
     :root {
       color-scheme: light;
       --paper: #ffffff;
-      --ink: #494e52;
-      --heading: #2b2f33;
-      --muted: #7a8288;
-      --rule: #e6e8ea;
-      --accent: #2f7f93;
-      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --ink: #1c242b;
+      --text: #46515b;
+      --muted: #7d8791;
+      --rule: #dfe3e7;
+      --accent: #1f6f8b;
+      --chip: #e8f3f1;
+      --chip-ink: #1d5c50;
+      --display: "Newsreader", Georgia, "Times New Roman", serif;
+      --body: "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+      --mono: "Source Code Pro", ui-monospace, Menlo, Consolas, monospace;
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; font-size: 18px; }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     body {
       margin: 0;
       background: var(--paper);
-      color: var(--ink);
-      font-family: var(--sans);
-      line-height: 1.6;
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 19px;
+      line-height: 1.65;
     }
     a { color: var(--accent); text-underline-offset: 3px; }
-    a:hover { color: var(--heading); }
     a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+    strong { color: var(--ink); font-weight: 600; }
 
-    .page {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 56px 24px 24px;
-      display: grid;
-      grid-template-columns: 220px minmax(0, 1fr);
-      gap: 24px 56px;
-      align-items: start;
-    }
-    .author { position: sticky; top: 28px; }
-    .author img { display: block; width: 180px; height: 180px; max-width: 100%; border-radius: 50%; object-fit: cover; margin: 0 0 18px; }
-    .author .name { font-size: 1.2rem; font-weight: 700; color: var(--heading); margin: 0 0 6px; line-height: 1.3; }
-    .author p { margin: 0 0 4px; font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
-    .author .tagline { color: var(--ink); margin-bottom: 12px; }
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 48px 28px 64px; }
 
-    main { max-width: 720px; }
-    h1 {
-      font-size: 2rem;
-      line-height: 1.2;
-      color: var(--heading);
-      margin: 0 0 18px;
-      text-wrap: balance;
-    }
-    h2 {
-      font-size: 1.35rem;
-      line-height: 1.3;
-      color: var(--heading);
-      margin: 0 0 6px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--rule);
-      text-wrap: balance;
-    }
-    p { margin: 0 0 16px; }
-    section { margin-top: 40px; }
-    section:first-of-type { margin-top: 28px; }
-    .item { margin-top: 22px; }
-    .row { display: flex; flex-wrap: nowrap; justify-content: space-between; align-items: baseline; gap: 0 20px; }
-    .row p { margin: 0; }
-    .org { font-weight: 700; color: var(--heading); }
-    .role { font-style: italic; }
-    .when, .where { color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
-    ul { margin: 8px 0 0; padding-left: 1.2em; }
-    li { margin-bottom: 6px; }
-    li:last-child { margin-bottom: 0; }
-    .plain { list-style: none; padding-left: 0; }
-    .plain li { margin-bottom: 10px; }
-
-    footer {
-      max-width: 1100px;
-      margin: 40px auto 0;
-      padding: 22px 24px 48px;
-      border-top: 1px solid var(--rule);
+    .keywords {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       color: var(--muted);
-      font-size: 0.8rem;
+      margin: 0 0 6px;
     }
+    h1 {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(2.6rem, 6vw, 3.4rem);
+      line-height: 1.1;
+      color: var(--ink);
+      margin: 0 0 28px;
+    }
+    .intro { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 28px 52px; align-items: start; }
+    .intro img { display: block; width: 100%; max-width: 320px; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 10px; }
+    .bio { max-width: 62ch; padding-top: 6px; }
+    .bio p { margin: 0 0 18px; }
+    .bio p:last-child { margin-bottom: 0; }
 
-    @media (max-width: 760px) {
-      html { font-size: 17px; }
-      .page { grid-template-columns: minmax(0, 1fr); padding-top: 28px; }
-      .author { position: static; padding-bottom: 20px; border-bottom: 1px solid var(--rule); }
-      .author img { width: 140px; height: 140px; }
-      .row { flex-wrap: wrap; }
+    section { margin-top: 68px; }
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 1.85rem;
+      line-height: 1.2;
+      color: var(--ink);
+      margin: 0 0 26px;
+    }
+    h2::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+
+    .edu { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 24px; }
+    .edu h3 { font-size: 1.1rem; font-weight: 600; color: var(--ink); margin: 0; }
+    .when { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); margin: 0; white-space: nowrap; }
+    .degrees { margin: 8px 0 0; }
+    .degrees p { margin: 0; }
+
+    .projects { display: flex; flex-direction: column; gap: 34px; }
+    .status {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      padding: 3px 9px;
+      border-radius: 4px;
+      background: var(--chip);
+      color: var(--chip-ink);
+      margin-bottom: 8px;
+    }
+    .project h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--ink);
+      margin: 0 0 4px;
+      text-wrap: balance;
+    }
+    .project p { margin: 0; max-width: 66ch; }
+    .project .more { color: var(--muted); font-size: 0.92rem; margin-top: 6px; }
+
+    footer { margin-top: 72px; padding-top: 20px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.85rem; }
+
+    @media (max-width: 720px) {
+      body { font-size: 17.5px; }
+      .wrap { padding: 32px 20px 48px; }
+      .intro { grid-template-columns: minmax(0, 1fr); }
+      .intro img { max-width: 240px; }
+      section { margin-top: 52px; }
     }
   </style>
 </head>
-<body id="top">
-  <div class="page">
-    <aside class="author" aria-label="About">
-      <img src="photo.jpg" alt="Portrait of Jian Ming Huang" width="180" height="180">
-      <p class="name">Jian Ming Huang</p>
-      <p class="tagline">Undergraduate in electrical engineering, neuroscience, and mathematics</p>
-      <p>University of Michigan</p>
-      <p>Ann Arbor, MI</p>
-    </aside>
-
-    <main>
-      <h1>Curriculum Vitae</h1>
-
-      <section>
-        <h2>Education</h2>
-        <div class="item">
-          <div class="row"><p class="org">University of Michigan</p><p class="where">Ann Arbor, MI</p></div>
-          <div class="row"><p class="role">B.S.E. in Electrical Engineering</p><p class="when">August 2022 – July 2027</p></div>
-          <p class="role">B.S. in Biopsychology, Cognition, and Neuroscience and Mathematics</p>
-          <p>Relevant coursework: Mathematical Neuroscience, Probability and Statistics Theory, Signals and Systems</p>
+<body>
+  <div class="wrap">
+    <header>
+      <p class="keywords">Auditory neuroscience · Circuit models · Signal processing</p>
+      <h1>Jian Ming Huang</h1>
+      <div class="intro">
+        <img src="photo.jpg" alt="Portrait of Jian Ming Huang" width="800" height="800">
+        <div class="bio">
+          <p>I'm an undergraduate at the <strong>University of Michigan</strong> pursuing a B.S.E. in Electrical Engineering and a B.S. in Biopsychology, Cognition, and Neuroscience and Mathematics, expected July 2027.</p>
+          <p>I study how the auditory system processes sound, and I like models whose parts mean something physiologically. I currently work with Anahita Mehta at the Kresge Hearing Research Institute, using EEG to study how listeners respond when a chord breaks harmonic expectation. Previously I worked with Gideon Rothschild on sound-guided navigation in rats.</p>
         </div>
-      </section>
+      </div>
+    </header>
 
-      <section>
-        <h2>Research Experience</h2>
-        <div class="item">
-          <div class="row"><p class="org">Kresge Hearing Research Institute, Mehta Lab</p><p class="where">Ann Arbor, MI</p></div>
-          <div class="row"><p class="role">Undergraduate Research Assistant, Advisor: Dr. Anahita Mehta</p><p class="when">January 2025 – Present</p></div>
-          <ul>
-            <li>Investigated neural responses to harmonic expectancy violations and sensory and cognitive priming using 64-channel EEG and behavioral ratings from 20+ participants.</li>
-            <li>Ran the EEG sessions independently, troubleshot recording problems in real time, and coordinated participant scheduling and consent.</li>
-            <li>Preprocessed the EEG in MATLAB (filtering, epoching, baseline correction, artifact removal).</li>
-            <li>Developed MATLAB scripts for group-level analysis of early right anterior negativity (ERAN) responses across experimental conditions, including ERP and scalp-topography visualizations.</li>
-          </ul>
-        </div>
-        <div class="item">
-          <div class="row"><p class="org">Department of Psychology, Rothschild Lab</p><p class="where">Ann Arbor, MI</p></div>
-          <div class="row"><p class="role">Undergraduate Research Assistant, Advisor: Dr. Gideon Rothschild</p><p class="when">September 2022 – December 2024</p></div>
-          <ul>
-            <li>Trained rats on a sound-guided navigation task using self-generated auditory cues to locate a rewarded port.</li>
-            <li>Conducted cue-conflict trials under light and dark conditions to dissociate visual and auditory guidance, finding greater reliance on self-generated sounds in darkness.</li>
-            <li>Assessed navigation in darkness following PBS (control) and muscimol infusions into auditory cortex.</li>
-            <li>Performed tissue sectioning and slide mounting for histological verification of infusion sites.</li>
-          </ul>
-        </div>
-      </section>
+    <section id="education">
+      <h2>Education</h2>
+      <div class="edu">
+        <h3>University of Michigan, Ann Arbor</h3>
+        <p class="when">Expected July 2027</p>
+      </div>
+      <div class="degrees">
+        <p>B.S.E. in Electrical Engineering</p>
+        <p>B.S. in Biopsychology, Cognition, and Neuroscience and Mathematics</p>
+      </div>
+    </section>
 
-      <section>
-        <h2>Presentations</h2>
-        <ul class="plain item">
-          <li>Huang JM (Presenter), Ferguson AJ, Graves JE, Tillmann B and Mehta AH. Perceptual and neural correlates of sensory and cognitive priming in chord sequences (2025). Poster presented at the Magnificent Michigan Summer Undergraduate Research Symposium, UM, Ann Arbor, MI</li>
-          <li>Huang JM (Presenter), Kumar M and Rothschild G. Role of rat auditory cortex in self-generated sound-guided navigation (2023). Talk presented at the National Conference on Undergraduate Research (NCUR), University of Wisconsin–Eau Claire, WI</li>
-          <li>Huang JM (Presenter), Kumar M and Rothschild G. Role of rat auditory cortex in self-generated sound-guided navigation (2023). Poster presented at the Michigan Research and Discovery Scholars (MRADS) Symposium, UM, Ann Arbor, MI</li>
-        </ul>
-      </section>
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects">
+        <article class="project">
+          <span class="status">In progress · MATH 568</span>
+          <h3>Circuit Model of Stimulus-Specific Adaptation in Auditory Cortex</h3>
+          <p>A cortical circuit model fit to oddball recordings from rat auditory cortex, to separate thalamocortical synaptic depression from interneuron short-term plasticity.</p>
+          <p class="more">Details (coming soon)</p>
+        </article>
+        <article class="project">
+          <span class="status">In progress · EECS 351</span>
+          <h3>Cochlear Implant Speech Processing and Intelligibility</h3>
+          <p>A cochlear-implant-style speech processor and noise vocoder in Python, scored for intelligibility across channel count, envelope cutoff, and compression.</p>
+          <p class="more">Details (coming soon)</p>
+        </article>
+        <article class="project">
+          <span class="status">Completed 2025 · MATH 462</span>
+          <h3>Thalamocortical Network Model of Absence Seizures</h3>
+          <p>A 350-neuron thalamocortical network in which corticothalamic feedback moves activity from gamma oscillations to 3 Hz seizure-like discharges.</p>
+          <p class="more">Details (coming soon)</p>
+        </article>
+      </div>
+    </section>
 
-      <section>
-        <h2>Fellowships and Awards</h2>
-        <div class="item">
-          <div class="row"><p><span class="org">Magnificent Michigan Fellowship</span>, summer research fellowship in the Mehta Lab</p><p class="when">Summer 2025</p></div>
-        </div>
-        <div class="item">
-          <div class="row"><p><span class="org">Michigan Research and Discovery Scholars (MRADS)</span>, University of Michigan</p><p class="when">2022 – 2023</p></div>
-        </div>
-      </section>
-
-      <section>
-        <h2>Skills</h2>
-        <ul class="plain item">
-          <li><span class="org">Programming:</span> Python, MATLAB, C++, R</li>
-          <li><span class="org">EEG:</span> 64-channel acquisition, preprocessing, ERP analysis, scalp-map visualization</li>
-          <li><span class="org">Animal research:</span> Rat behavioral training and testing, histology</li>
-          <li><span class="org">Computational modeling:</span> Conductance-based neural networks, numerical simulation, bifurcation analysis</li>
-        </ul>
-      </section>
-    </main>
+    <footer>© 2026 Jian Ming Huang · Ann Arbor, MI</footer>
   </div>
-
-  <footer>© 2026 Jian Ming Huang</footer>
 </body>
 </html>
