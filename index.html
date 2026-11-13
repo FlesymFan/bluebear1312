@@ -7,7 +7,7 @@
   <meta name="googlebot" content="noindex, nofollow">
   <title>Jian Ming Huang</title>
   <style>
-    /* Layout: white page, top masthead, a narrow left sidebar with the author block, and one main reading column. Sidebar stacks above the content on phones. */
+    /* Layout: white page, a narrow left sidebar with the author block, and one main reading column. Sidebar stacks above the content on phones. */
     :root {
       color-scheme: light;
       --paper: #ffffff;
@@ -32,30 +32,17 @@
     a:hover { color: var(--heading); }
     a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
-    .masthead { border-bottom: 1px solid var(--rule); }
-    .masthead nav {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 16px 24px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      gap: 6px 28px;
-    }
-    .masthead a { color: var(--muted); text-decoration: none; font-size: 0.9rem; }
-    .masthead a:hover { color: var(--heading); }
-    .masthead .site { color: var(--heading); font-weight: 700; font-size: 1rem; margin-right: 8px; }
-
     .page {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 44px 24px 24px;
+      padding: 56px 24px 24px;
       display: grid;
       grid-template-columns: 220px minmax(0, 1fr);
       gap: 24px 56px;
       align-items: start;
     }
     .author { position: sticky; top: 28px; }
+    .author img { display: block; width: 180px; height: 180px; max-width: 100%; border-radius: 50%; object-fit: cover; margin: 0 0 18px; }
     .author .name { font-size: 1.2rem; font-weight: 700; color: var(--heading); margin: 0 0 6px; line-height: 1.3; }
     .author p { margin: 0 0 4px; font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
     .author .tagline { color: var(--ink); margin-bottom: 12px; }
@@ -78,9 +65,19 @@
       text-wrap: balance;
     }
     p { margin: 0 0 16px; }
-    article { margin-top: 44px; scroll-margin-top: 16px; }
-    .meta { font-size: 0.85rem; color: var(--muted); margin: 10px 0 14px; }
-    .soon { font-size: 0.85rem; color: var(--muted); font-style: italic; margin: 0; }
+    section { margin-top: 40px; }
+    section:first-of-type { margin-top: 28px; }
+    .item { margin-top: 22px; }
+    .row { display: flex; flex-wrap: nowrap; justify-content: space-between; align-items: baseline; gap: 0 20px; }
+    .row p { margin: 0; }
+    .org { font-weight: 700; color: var(--heading); }
+    .role { font-style: italic; }
+    .when, .where { color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    ul { margin: 8px 0 0; padding-left: 1.2em; }
+    li { margin-bottom: 6px; }
+    li:last-child { margin-bottom: 0; }
+    .plain { list-style: none; padding-left: 0; }
+    .plain li { margin-bottom: 10px; }
 
     footer {
       max-width: 1100px;
@@ -95,21 +92,15 @@
       html { font-size: 17px; }
       .page { grid-template-columns: minmax(0, 1fr); padding-top: 28px; }
       .author { position: static; padding-bottom: 20px; border-bottom: 1px solid var(--rule); }
+      .author img { width: 140px; height: 140px; }
+      .row { flex-wrap: wrap; }
     }
   </style>
 </head>
 <body id="top">
-  <header class="masthead">
-    <nav aria-label="Main">
-      <a class="site" href="#top">Jian Ming Huang</a>
-      <a href="#adaptation">Adaptation</a>
-      <a href="#cochlear-implant">Cochlear implant</a>
-      <a href="#absence-seizures">Absence seizures</a>
-    </nav>
-  </header>
-
   <div class="page">
     <aside class="author" aria-label="About">
+      <img src="photo.jpg" alt="Portrait of Jian Ming Huang" width="180" height="180">
       <p class="name">Jian Ming Huang</p>
       <p class="tagline">Undergraduate in electrical engineering, neuroscience, and mathematics</p>
       <p>University of Michigan</p>
@@ -117,35 +108,70 @@
     </aside>
 
     <main>
-      <h1>Course Projects</h1>
-      <p>I am interested in how circuits in the auditory system process sound, and I build mechanistic models to study them. This page collects three course projects.</p>
+      <h1>Curriculum Vitae</h1>
 
-      <article id="adaptation">
-        <h2>Circuit Model of Stimulus-Specific Adaptation in Auditory Cortex</h2>
-        <p class="meta">MATH 568, Mathematical and Computational Neuroscience · Sept 2026 – present · In progress</p>
-        <p>Neurons in auditory cortex respond less to a repeated tone and more to a rare one. This project asks how much of that tone-by-tone adaptation comes from depression at thalamocortical synapses, and how much from short-term plasticity at interneuron synapses.</p>
-        <p>I add activity-dependent Tsodyks–Markram short-term plasticity to the synapses to and from parvalbumin (PV) and somatostatin (SST) interneurons in the Park and Geffen (2020) circuit model. I fit the original and extended models to oddball recordings from 114 neurons in rat auditory cortex (Vázquez-Borsetti et al., 2026) and test how well each predicts held-out responses after a deviant tone.</p>
-        <p>I derived a closed-form tone-to-tone map for thalamocortical depression. It predicts synaptic strength at each tone onset from the model parameters and agrees with simulation to within 0.003.</p>
-        <p class="soon">Write-up and code coming soon</p>
-      </article>
+      <section>
+        <h2>Education</h2>
+        <div class="item">
+          <div class="row"><p class="org">University of Michigan</p><p class="where">Ann Arbor, MI</p></div>
+          <div class="row"><p class="role">B.S.E. in Electrical Engineering</p><p class="when">August 2022 – July 2027</p></div>
+          <p class="role">B.S. in Biopsychology, Cognition, and Neuroscience and Mathematics</p>
+          <p>Relevant coursework: Mathematical Neuroscience, Probability and Statistics Theory, Signals and Systems</p>
+        </div>
+      </section>
 
-      <article id="cochlear-implant">
-        <h2>Cochlear Implant Speech Processing and Intelligibility</h2>
-        <p class="meta">EECS 351, Digital Signal Processing · Sept 2026 – present · In progress</p>
-        <p>A cochlear implant reduces speech to slow amplitude envelopes in a small number of frequency channels. This project builds that processing chain in Python and measures how much intelligibility survives it.</p>
-        <p>The pipeline uses a Greenwood-spaced band-pass filter bank, envelope extraction by full-wave rectification and low-pass filtering, and power-law compression, followed by noise-vocoder resynthesis. I vary channel count from 1 to 22, envelope cutoff, and compression level, and score the output with short-time objective intelligibility (STOI) and the word error rate (WER) of an automatic speech recognizer.</p>
-        <p>The two measures disagree. STOI scores of 0.47 to 0.64 occur alongside WER of 100% or more. I am extending the framework to speech in background noise to test whether front-end denoising helps.</p>
-        <p class="soon">Write-up, audio demos, and code coming soon</p>
-      </article>
+      <section>
+        <h2>Research Experience</h2>
+        <div class="item">
+          <div class="row"><p class="org">Kresge Hearing Research Institute, Mehta Lab</p><p class="where">Ann Arbor, MI</p></div>
+          <div class="row"><p class="role">Undergraduate Research Assistant, Advisor: Dr. Anahita Mehta</p><p class="when">January 2025 – Present</p></div>
+          <ul>
+            <li>Investigated neural responses to harmonic expectancy violations and sensory and cognitive priming using 64-channel EEG and behavioral ratings from 20+ participants.</li>
+            <li>Ran the EEG sessions independently, troubleshot recording problems in real time, and coordinated participant scheduling and consent.</li>
+            <li>Preprocessed the EEG in MATLAB (filtering, epoching, baseline correction, artifact removal).</li>
+            <li>Developed MATLAB scripts for group-level analysis of early right anterior negativity (ERAN) responses across experimental conditions, including ERP and scalp-topography visualizations.</li>
+          </ul>
+        </div>
+        <div class="item">
+          <div class="row"><p class="org">Department of Psychology, Rothschild Lab</p><p class="where">Ann Arbor, MI</p></div>
+          <div class="row"><p class="role">Undergraduate Research Assistant, Advisor: Dr. Gideon Rothschild</p><p class="when">September 2022 – December 2024</p></div>
+          <ul>
+            <li>Trained rats on a sound-guided navigation task using self-generated auditory cues to locate a rewarded port.</li>
+            <li>Conducted cue-conflict trials under light and dark conditions to dissociate visual and auditory guidance, finding greater reliance on self-generated sounds in darkness.</li>
+            <li>Assessed navigation in darkness following PBS (control) and muscimol infusions into auditory cortex.</li>
+            <li>Performed tissue sectioning and slide mounting for histological verification of infusion sites.</li>
+          </ul>
+        </div>
+      </section>
 
-      <article id="absence-seizures">
-        <h2>Thalamocortical Network Model of Absence Seizures</h2>
-        <p class="meta">MATH 462, Mathematical Models, team project · Jan – Apr 2025 · Completed</p>
-        <p>Absence seizures appear as 3 Hz discharges that involve both cortex and thalamus. This project models how feedback from cortex to thalamus can move a network from normal gamma oscillations into that seizure-like rhythm.</p>
-        <p>We extended a conductance-based pyramidal–interneuron network gamma (PING) model to a 350-neuron thalamocortical network with relay and reticular populations. The model includes T-type calcium currents, AMPA, GABA<sub>A</sub>, and GABA<sub>B</sub> synapses, and corticothalamic feedback.</p>
-        <p>The network shifts from gamma oscillations to 3 Hz seizure-like discharges depending on corticothalamic feedback, which we characterized with spectral, bursting, and synchrony analyses. A fast–slow bifurcation analysis identifies a saddle-node threshold for thalamic rebound bursting and explains how slow GABA<sub>B</sub> inhibition sets the discharge period.</p>
-        <p class="soon">Write-up and code coming soon</p>
-      </article>
+      <section>
+        <h2>Presentations</h2>
+        <ul class="plain item">
+          <li>Huang JM (Presenter), Ferguson AJ, Graves JE, Tillmann B and Mehta AH. Perceptual and neural correlates of sensory and cognitive priming in chord sequences (2025). Poster presented at the Magnificent Michigan Summer Undergraduate Research Symposium, UM, Ann Arbor, MI</li>
+          <li>Huang JM (Presenter), Kumar M and Rothschild G. Role of rat auditory cortex in self-generated sound-guided navigation (2023). Talk presented at the National Conference on Undergraduate Research (NCUR), University of Wisconsin–Eau Claire, WI</li>
+          <li>Huang JM (Presenter), Kumar M and Rothschild G. Role of rat auditory cortex in self-generated sound-guided navigation (2023). Poster presented at the Michigan Research and Discovery Scholars (MRADS) Symposium, UM, Ann Arbor, MI</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Fellowships and Awards</h2>
+        <div class="item">
+          <div class="row"><p><span class="org">Magnificent Michigan Fellowship</span>, summer research fellowship in the Mehta Lab</p><p class="when">Summer 2025</p></div>
+        </div>
+        <div class="item">
+          <div class="row"><p><span class="org">Michigan Research and Discovery Scholars (MRADS)</span>, University of Michigan</p><p class="when">2022 – 2023</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Skills</h2>
+        <ul class="plain item">
+          <li><span class="org">Programming:</span> Python, MATLAB, C++, R</li>
+          <li><span class="org">EEG:</span> 64-channel acquisition, preprocessing, ERP analysis, scalp-map visualization</li>
+          <li><span class="org">Animal research:</span> Rat behavioral training and testing, histology</li>
+          <li><span class="org">Computational modeling:</span> Conductance-based neural networks, numerical simulation, bifurcation analysis</li>
+        </ul>
+      </section>
     </main>
   </div>
 
